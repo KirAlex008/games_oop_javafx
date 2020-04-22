@@ -43,8 +43,8 @@ public class Logic {
         boolean result = cells.length > 0;
         for (Cell cell : cells) {
             if (this.findBy(cell) != -1) {
-               result = false;
-               break;
+                result = false;
+                break;
             }
         }
         return result;
@@ -71,6 +71,27 @@ public class Logic {
     public boolean isWin() {
         int[][] table = this.convert();
         boolean result = false;
+        for (int i = 0; i < table.length; i++) {
+            for (int j = 0; j < table[i].length; j++) {
+                if (table[i][j] == 1) {
+                    int m = 0;
+                    while (i < table.length && table[m][j] == 1) {
+                        m++;
+                        if (m == table.length - 1) {
+                            result = true;
+                            break;
+                        }
+                    }
+                    while (i < table.length && table[i][m] == 1) {
+                        m++;
+                        if (m == table.length - 1) {
+                            result = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
         return result;
     }
 

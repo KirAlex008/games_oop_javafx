@@ -6,7 +6,6 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
-@Ignore
 public class LogicTest {
     @Test
     public void whenVerticalWin() {
@@ -60,16 +59,16 @@ public class LogicTest {
     }
 
     @Test
-    public void whenNotWinL() {
+    public void whenNotWin2() {
         Logic logic = new Logic(5) {
             @Override
             public int[][] convert() {
                 return new int[][] {
-                        {0, 0, 0, 0, 0},
-                        {0, 0, 0, 0, 0},
-                        {0, 0, 0, 0, 0},
-                        {0, 0, 0, 1, 0},
-                        {1, 1, 1, 1, 0},
+                        {0, 1, 0, 0, 0},
+                        {1, 0, 0, 0, 0},
+                        {1, 0, 0, 0, 0},
+                        {1, 0, 0, 0, 0},
+                        {1, 0, 0, 0, 0},
                 };
             }
         };
