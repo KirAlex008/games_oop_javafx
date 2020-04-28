@@ -84,7 +84,7 @@ public class Logic {
             if (board[i][column] != 1) {
                 result = false;
                 break;
-                }
+            }
             }
         return result;
     }
