@@ -93,13 +93,10 @@ public class Logic {
         int[][] table = this.convert();
         boolean result = false;
         for (int i = 0; i < table.length; i++) {
-            for (int j = 0; j < table[i].length; j++) {
-                if ((table[i][j] == 1) && (monoHorizontal(table, i) || monoVertical(table, j))) {
-                    result = true;
-                    break;
-                }
+            if ((monoHorizontal(table, i) || monoVertical(table, i))) {
+                result = true;
+                break;
             }
-
         }
         return result;
     }
