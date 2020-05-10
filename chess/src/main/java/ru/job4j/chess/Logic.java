@@ -4,6 +4,7 @@ import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -23,16 +24,28 @@ public class Logic {
 
     public boolean move(Cell source, Cell dest) {
         boolean rst = false;
-        int index = this.findBy(source);
-        if (index != -1) {
-            Cell[] steps = this.figures[index].way(source, dest);
-            if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
-                rst = true;
-                this.figures[index] = this.figures[index].copy(dest);
+        try {
+            int index1 = this.findBy(source);
+            if (index1 != -1) {
+                Cell[] steps = this.figures[index1].way(source, dest);
+                for (int i = 0; i < steps.length; i++) {
+                    for (int j = 0; j < index; j++) {
+                        if (steps[i].equals(figures[j].position())) {
+                            throw new IllegalStateException();
+                        }
+                    }
+                }
+                if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
+                    rst = true;
+                    this.figures[index1] = this.figures[index1].copy(dest);
+                }
             }
+        } catch (Exception e) {
+            System.out.println(String.format("Way is not free, try again."));;
         }
         return rst;
     }
+
 
     public void clean() {
         for (int position = 0; position != this.figures.length; position++) {
@@ -57,5 +70,21 @@ public class Logic {
         return "Logic{" +
                 "figures=" + Arrays.toString(this.figures) +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Logic logic = (Logic) o;
+        return index == logic.index &&
+                Arrays.equals(figures, logic.figures);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(index);
+        result = 31 * result + Arrays.hashCode(figures);
+        return result;
     }
 }
