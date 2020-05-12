@@ -36,17 +36,5 @@ public class BishopBlackTest {
         assertThat(rsl, is(expected));
     }
 
-    @Test
-    public void whenIsNotDiagonal() {
-        ByteArrayOutputStream mem = new ByteArrayOutputStream();
-        PrintStream out = System.out;
-        System.setOut(new PrintStream(mem));
-        BishopBlack bishopBlack = new BishopBlack(Cell.C1);
-        bishopBlack.way(Cell.C1, Cell.G6);
-        assertThat(
-                mem.toString(),
-                is(String.format("Could not way by diagonal from C1 to G6.%n"))
-        );
-        System.setOut(out);
-    }
+
 }
