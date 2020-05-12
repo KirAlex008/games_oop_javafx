@@ -28,24 +28,29 @@ public class Logic {
             int index1 = this.findBy(source);
             if (index1 != -1) {
                 Cell[] steps = this.figures[index1].way(source, dest);
-                for (int i = 0; i < steps.length; i++) {
-                    for (int j = 0; j < index; j++) {
-                        if (steps[i].equals(figures[j].position())) {
-                            throw new IllegalStateException();
-                        }
-                    }
-                }
+                freeWay(steps);
                 if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
                     rst = true;
                     this.figures[index1] = this.figures[index1].copy(dest);
                 }
             }
-        } catch (Exception e) {
+        } catch (IllegalStateException e) {
             System.out.println(String.format("Way is not free, try again."));;
         }
         return rst;
     }
 
+    public boolean freeWay(Cell[] steps) {
+        boolean rst = true;
+            for (int i = 0; i < steps.length; i++) {
+                for (int j = 0; j < index; j++) {
+                    if (steps[i].equals(figures[j].position())) {
+                        throw new IllegalStateException();
+                    }
+                }
+            }
+        return rst;
+    }
 
     public void clean() {
         for (int position = 0; position != this.figures.length; position++) {

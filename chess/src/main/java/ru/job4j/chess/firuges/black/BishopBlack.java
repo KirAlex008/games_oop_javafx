@@ -18,9 +18,7 @@ public class BishopBlack implements Figure {
     @Override
     public Cell[] way(Cell source, Cell dest) {
         try {
-            if (!isDiagonal(source, dest)) {
-                throw new IllegalStateException();
-            }
+            isDiagonal(source, dest);
         } catch (IllegalStateException moe) {
             System.out.println(String.format("Could not way by diagonal from %s to %s.", source, dest));
         }
@@ -30,16 +28,15 @@ public class BishopBlack implements Figure {
             int deltaY = (dest.y - source.y) / size;
             for (int index = 0; index < size; index++) {
                 steps[index] = Cell.findBy(source.x + deltaX + index, source.y + deltaY + index);
-
         }
         return steps;
 
     }
 
     public boolean isDiagonal(Cell source, Cell dest) {
-        boolean rsl = false;
-        if ((source.x + source.y) == (dest.x + dest.y) || (dest.y - dest.x) == (source.y - source.x)) {
-            rsl = true;
+        boolean rsl = true;
+        if (Math.abs(source.x - dest.x) != Math.abs(source.y - dest.y )) {
+            throw new IllegalStateException();
         }
         return rsl;
     }

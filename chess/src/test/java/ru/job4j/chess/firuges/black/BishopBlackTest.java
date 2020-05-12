@@ -31,8 +31,8 @@ public class BishopBlackTest {
     @Test
     public void way() {
         BishopBlack bishopBlack = new BishopBlack(Cell.C1);
-        Cell[] rsl = bishopBlack.way(Cell.C1, Cell.G6);
-        Cell[] expected = {Cell.D2, Cell.E3, Cell.F4, Cell.G5};
+        Cell[] rsl = bishopBlack.way(Cell.C1, Cell.H6);
+        Cell[] expected = {Cell.D2, Cell.E3, Cell.F4, Cell.G5, Cell.H6};
         assertThat(rsl, is(expected));
     }
 
@@ -48,7 +48,5 @@ public class BishopBlackTest {
                 is(String.format("Could not way by diagonal from C1 to G6.%n"))
         );
         System.setOut(out);
-
     }
-
 }
