@@ -36,5 +36,17 @@ public class BishopBlackTest {
         assertThat(rsl, is(expected));
     }
 
-
+    @Test
+    public void whenIsNotDiagonal() {
+        ByteArrayOutputStream mem = new ByteArrayOutputStream();
+        PrintStream out = System.out;
+        System.setOut(new PrintStream(mem));
+        BishopBlack bishopBlack = new BishopBlack(Cell.C1);
+        bishopBlack.way(Cell.C1, Cell.G6);
+        assertThat(
+                mem.toString(),
+                is(String.format("Way is not free, try again.%n"))
+        );
+        System.setOut(out);
+    }
 }
